@@ -1,23 +1,31 @@
-import { observer } from "mobx-react-lite"
 import React, { ComponentType, FC, useEffect, useMemo, useRef, useState } from "react"
 import { TextInput, TextStyle, ViewStyle } from "react-native"
 import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
-import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
+import { useDispatch } from "react-redux"
+import { loginSuccessful } from "app/store/login/loginSlice"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
-export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
+export const LoginScreen: FC<LoginScreenProps> = (_props) => {
   const authPasswordInput = useRef<TextInput>(null)
+  const dispatch = useDispatch()
 
   const [authPassword, setAuthPassword] = useState("")
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
-  const {
-    authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError },
-  } = useStores()
+
+  const authEmail = ""
+  const setAuthEmail = (e: string) => {
+    console.debug(e)
+  }
+  const setAuthToken = (e: string) => {
+    console.debug(e)
+  }
+
+  const validationError = ""
 
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
@@ -34,7 +42,12 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
   const error = isSubmitted ? validationError : ""
 
-  function login() {
+  const login = () => {
+    dispatch(
+      loginSuccessful({
+        user: "abc",
+      }),
+    )
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
 
@@ -72,8 +85,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
     >
-      <Text testID="login-heading" tx="loginScreen.signIn" preset="heading" style={$signIn} />
-      <Text tx="loginScreen.enterDetails" preset="subheading" style={$enterDetails} />
+      <Text testID="login-heading" tx="loginScreen.logIn" preset="heading" style={$signIn} />
       {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
 
       <TextField
@@ -115,7 +127,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       />
     </Screen>
   )
-})
+}
 
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.xxl,
@@ -124,10 +136,6 @@ const $screenContentContainer: ViewStyle = {
 
 const $signIn: TextStyle = {
   marginBottom: spacing.sm,
-}
-
-const $enterDetails: TextStyle = {
-  marginBottom: spacing.lg,
 }
 
 const $hint: TextStyle = {

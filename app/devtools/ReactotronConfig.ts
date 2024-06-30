@@ -13,6 +13,7 @@ import { clear } from "app/utils/storage"
 import { goBack, resetRoot, navigate } from "app/navigators/navigationUtilities"
 
 import { Reactotron } from "./ReactotronClient"
+import { reactotronRedux } from "reactotron-redux"
 
 const reactotron = Reactotron.configure({
   name: require("../../package.json").name,
@@ -20,12 +21,22 @@ const reactotron = Reactotron.configure({
     /** since this file gets hot reloaded, let's clear the past logs every time we connect */
     Reactotron.clear()
   },
-}).use(
-  mst({
-    /* ignore some chatty `mobx-state-tree` actions */
-    filter: (event) => /postProcessSnapshot|@APPLY_SNAPSHOT/.test(event.name) === false,
-  }),
-)
+})
+  .use(
+    mst({
+      filter: (event) => /postProcessSnapshot|@APPLY_SNAPSHOT/.test(event.name) === false,
+    }),
+  )
+  .useReactNative({
+    asyncStorage: false, // there are more options to the async storage.
+    networking: {
+      // optionally, you can turn it off with false.
+      ignoreUrls: /symbolicate/,
+    },
+    editor: false, // there are more options to editor
+    overlay: false, // just turning off overlay
+  })
+  .use(reactotronRedux())
 
 if (Platform.OS !== "web") {
   reactotron.setAsyncStorageHandler?.(AsyncStorage)
@@ -151,3 +162,5 @@ declare global {
  * Now that we've setup all our Reactotron configuration, let's connect!
  */
 reactotron.connect()
+
+export default reactotron
