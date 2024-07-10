@@ -1,0 +1,126 @@
+import { colors } from "app/theme"
+import { StyleSheet } from "react-native"
+
+export const styles = StyleSheet.create({
+  TextInput: {
+    color: colors.palette.secondary100,
+    flex: 1,
+    padding: 10,
+    textAlign: "left",
+    width: "100%",
+  },
+  backButton: {
+    color: colors.palette.primary200,
+    fontFamily: "Objective",
+    fontSize: 11,
+    fontWeight: "800",
+    letterSpacing: 1,
+    lineHeight: 16,
+    marginLeft: 10,
+    textAlign: "left",
+    textTransform: "uppercase",
+  },
+  backButtonContainer: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 25,
+  },
+  buttonContainer: {
+    color: colors.palette.neutral100,
+    fontFamily: "Objective",
+    marginBottom: 17,
+  },
+  buttonLoginSSO: {
+    marginTop: 32,
+    padding: 16,
+  },
+  buttonWrapper: {
+    padding: 16,
+  },
+  container: {
+    display: "flex",
+    flex: 1,
+    justifyContent: "space-between",
+    padding: 32,
+  },
+  errorText: {
+    color: colors.error,
+    paddingVertical: 5,
+  },
+  inputView: {
+    alignItems: "center",
+    backgroundColor: colors.background,
+    borderColor: colors.palette.neutral200,
+    borderRadius: 12,
+    borderWidth: StyleSheet.hairlineWidth,
+    height: 45,
+    marginBottom: 0,
+    width: "100%",
+  },
+  login: {
+    marginTop: 27,
+  },
+  loginWith: {
+    color: colors.palette.secondary100,
+    fontSize: 14,
+    fontWeight: "400",
+    lineHeight: 24,
+    marginBottom: 16,
+    textAlign: "center",
+  },
+  logo: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    width: "100%",
+  },
+  resetPassContainer: {
+    elevation: 5,
+    width: "100%",
+    zIndex: 5,
+  },
+  resetPassText: {
+    color: colors.palette.primary100,
+    fontSize: 14,
+    fontStyle: "normal",
+    fontWeight: "400",
+    lineHeight: 24,
+  },
+  screen: {
+    backgroundColor: colors.background,
+    flex: 1,
+    paddingTop: 40,
+  },
+  scrollView: {
+    display: "flex",
+    flex: 1,
+    height: "100%",
+    justifyContent: "space-between",
+  },
+  scrollViewPortrail: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  sectionLabel: {
+    color: colors.palette.gray100,
+    fontFamily: "Objective",
+    fontSize: 11,
+    fontStyle: "normal",
+    fontWeight: "700",
+    letterSpacing: 1,
+    lineHeight: 16,
+    marginBottom: 4,
+    textTransform: "uppercase",
+  },
+  ssoContainer: {},
+  ssoText: {
+    fontSize: 14,
+    fontWeight: "500",
+    letterSpacing: 1,
+    marginBottom: 16,
+    marginTop: 24,
+    textAlign: "center",
+  },
+})
